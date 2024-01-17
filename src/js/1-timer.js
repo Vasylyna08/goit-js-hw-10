@@ -34,7 +34,6 @@ const options = {
       });
     } else {
       buttonEl.disabled = false;
-      buttonEl.classList.remove('disabled');
     }
   },
 };
