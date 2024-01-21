@@ -8,7 +8,7 @@ const buttonEl = document.querySelector('[data-start]');
 const daysEl = document.querySelector('[data-days]');
 const hoursEl = document.querySelector('[data-hours]');
 const minutesEl = document.querySelector('[data-minutes]');
-const secondstEl = document.querySelector('[data-seconds]');
+const secondsEl = document.querySelector('[data-seconds]');
 
 let userSelectedDate;
 buttonEl.disabled = true;
@@ -20,7 +20,7 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     userSelectedDate = selectedDates[0];
-    if (userSelectedDate <= new Date()) {
+    if (userSelectedDate <= new Date().getTime()) {
       buttonEl.disabled = true;
       iziToast.show({
         title: '❌',
@@ -69,9 +69,8 @@ function onStartTimer() {
   buttonEl.disabled = true;
   inputEl.disabled = true;
   const interval = setInterval(() => {
-    const startTime = new Date();
-    const diff = userSelectedDate - startTime;
-    if (diff <= 0) {
+    const diff = userSelectedDate - Date.now();
+    if (diff < 1000) {
       clearInterval(interval);
       inputEl.disabled = false;
     }
@@ -79,6 +78,6 @@ function onStartTimer() {
     daysEl.textContent = addLeadingZero(time.days);
     hoursEl.textContent = addLeadingZero(time.hours);
     minutesEl.textContent = addLeadingZero(time.minutes);
-    secondstEl.textContent = addLeadingZero(time.seconds);
+    secondsEl.textContent = addLeadingZero(time.seconds);
   }, 1000);
 }

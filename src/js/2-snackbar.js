@@ -3,10 +3,10 @@ import 'izitoast/dist/css/iziToast.min.css';
 
 const formEl = document.querySelector('.form');
 
-const makePromise = ({ value, delay, state }) => {
+const makePromise = ({ delay, state }) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      state === 'fulfilled' ? resolve(value) : reject(value);
+      state === 'fulfilled' ? resolve(delay) : reject(delay);
     }, delay);
   });
 };
@@ -16,11 +16,11 @@ formEl.addEventListener('submit', event => {
   const delayEl = formEl.delay.value;
   const stateEl = formEl.state.value;
 
-  makePromise({ value: delayEl, delay: delayEl, state: stateEl })
-    .then(value =>
+  makePromise({ delay: delayEl, state: stateEl })
+    .then(delay =>
       iziToast.show({
-        title: '✔️',
-        message: `Fulfilled promise in ${delayEl} ms!`,
+        title: 'Ok',
+        message: `✔️ Fulfilled promise in ${delayEl} ms!`,
         position: 'topRight',
         messageColor: '#fff',
         messageSize: '20px',
@@ -32,8 +32,8 @@ formEl.addEventListener('submit', event => {
     )
     .catch(error =>
       iziToast.show({
-        title: '❌',
-        message: `Rejected promise in ${delayEl} ms!`,
+        title: 'Error',
+        message: `❌ Rejected promise in ${delayEl} ms!`,
         position: 'topRight',
         messageColor: '#fff',
         messageSize: '20px',
