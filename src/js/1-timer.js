@@ -70,7 +70,7 @@ function onStartTimer() {
   inputEl.disabled = true;
   const interval = setInterval(() => {
     const diff = userSelectedDate - Date.now();
-    if (diff < 1000) {
+    if (diff <= 1000) {
       clearInterval(interval);
       inputEl.disabled = false;
     }
