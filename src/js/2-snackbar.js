@@ -13,14 +13,14 @@ const makePromise = ({ delay, state }) => {
 
 formEl.addEventListener('submit', event => {
   event.preventDefault();
-  const delayEl = formEl.delay.value;
-  const stateEl = formEl.state.value;
+  const delayValue = Number(formEl.delay.value);
+  const stateValue = formEl.state.value;
 
-  makePromise({ delay: delayEl, state: stateEl })
+  makePromise({ delay: delayValue, state: stateValue })
     .then(delay =>
       iziToast.show({
         title: 'Ok',
-        message: `✔️ Fulfilled promise in ${delayEl} ms!`,
+        message: `✔️ Fulfilled promise in ${delay} ms!`,
         position: 'topRight',
         messageColor: '#fff',
         messageSize: '20px',
@@ -30,10 +30,10 @@ formEl.addEventListener('submit', event => {
         progressBarEasing: 'linear',
       })
     )
-    .catch(error =>
+    .catch(delay =>
       iziToast.show({
         title: 'Error',
-        message: `❌ Rejected promise in ${delayEl} ms!`,
+        message: `❌ Rejected promise in ${delay} ms!`,
         position: 'topRight',
         messageColor: '#fff',
         messageSize: '20px',
